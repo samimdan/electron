@@ -1,0 +1,7 @@
+{
+  "files": ["dist-electron", "dist-react"],
+  "icon": "authy.png",
+  "win": {
+    "target": ["portable", "msi"]
+  }
+}
