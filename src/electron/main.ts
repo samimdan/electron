@@ -11,7 +11,7 @@ app.on("ready", () => {
     },
   });
   if (isDev()) {
-    MainWindow.loadURL("http://localhost:5123");
+    MainWindow.loadURL("http://localhost:5000");
   } else {
     MainWindow.loadFile(path.join(app.getAppPath(), "/dist-react/index.html"));
   }
