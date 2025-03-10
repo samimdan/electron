@@ -1,5 +1,6 @@
 {
   "files": ["dist-electron", "dist-react"],
+  "extraResources": ["dist-react/preload.cjs"],
   "icon": "authy.png",
   "win": {
     "target": ["portable", "msi"]

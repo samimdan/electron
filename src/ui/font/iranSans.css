@@ -1,0 +1,20 @@
+@font-face {
+  font-family: 'Iran Sans Bold';
+  src: url('./IranSans/woff/IRANSansX-Bold.woff');
+}
+@font-face {
+  font-family: 'Iran Sans';
+  src: url('./IranSans/woff/IRANSansX-Regular.woff');
+}
+p {
+  font-family: 'Iran Sans';
+}
+.bold {
+  font-family: 'Iran Sans Bold';
+}
+.regular {
+  font-family: 'Iran Sans';
+}
+span > p {
+  font-family: 'Iran Sans Bold';
+}

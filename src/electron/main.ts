@@ -1,18 +1,48 @@
-import { app, BrowserWindow } from "electron";
-import path from "path";
-import { isDev } from "./util.js";
+import { app, BrowserWindow, ipcMain, dialog } from 'electron'
+import path from 'path'
 
-app.on("ready", () => {
-  const MainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+function createWindow() {
+  const mainWindow = new BrowserWindow({
+    width: 250,
+    height: 1000,
+    //  disable menu
+
+    fullscreen: false,
+    show: false,
+    frame: false,
+    transparent: true,
+    alwaysOnTop: true,
     webPreferences: {
+      preload: path.join(app.getAppPath(), './dist-electron/preload.js'),
+      autoplayPolicy: 'no-user-gesture-required',
       nodeIntegration: true,
     },
-  });
-  if (isDev()) {
-    MainWindow.loadURL("http://localhost:5000");
-  } else {
-    MainWindow.loadFile(path.join(app.getAppPath(), "/dist-react/index.html"));
-  }
-});
+  })
+  //set interval to update webcontents every 30 minutes
+  setInterval(() => {
+    mainWindow?.webContents.send('getDay', '')
+    mainWindow?.webContents.send('getAzanSobh', '')
+    mainWindow?.webContents.send('getAzanZohr', '')
+    mainWindow?.webContents.send('getAzanMaghreb', '')
+  }, 1800000)
+  //ipcMain: Listens for events in themain process.
+  mainWindow.webContents.on('did-frame-finish-load', () => {
+    mainWindow?.webContents.send('getDay', '')
+    mainWindow?.webContents.send('getAzanSobh', '')
+    mainWindow?.webContents.send('getAzanZohr', '')
+    mainWindow?.webContents.send('getAzanMaghreb', '')
+  })
+  mainWindow.on('ready-to-show', mainWindow.show)
+  mainWindow.loadURL('http://localhost:5000')
+}
+
+app
+  .whenReady()
+  .then(() => {
+    createWindow()
+  })
+  .catch(error => {
+    console.error('Failed to create window:', error)
+    dialog.showErrorBox('Error', `Failed to create window: ${error.message}`)
+  })
+//set interval to update webcontents every 30 minutes
