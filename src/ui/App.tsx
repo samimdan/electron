@@ -149,7 +149,7 @@ function App() {
                 :
               </motion.span>
               <span className="text-4xl clock">
-                {azanSobh.split(':')[1]} PM
+                {azanSobh.split(':')[1]} AM
               </span>
             </div>
             <span>

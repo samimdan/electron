@@ -13,7 +13,7 @@ type ClockProps = {
 }
 function Clock({ sHour, sMinute, zHour, zMinute, mHour, mMinute }: ClockProps) {
   const [time, setTime] = useState(new Date())
-  const [isPlaying, setIsPlaying] = useState<boolean>(false)
+
   const soundAzan = new Audio(soundhour)
   const soundHour = new Audio(soundazan)
   useEffect(() => {

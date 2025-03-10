@@ -26,7 +26,6 @@ export const getAzanSobh = async () => {
       .then(res => {
         const $ = cheerio.load(res.data)
         const azanSobh = $('div#timer').text()
-
         resolve(azanSobh)
       })
       .catch(error => {
