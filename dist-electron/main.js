@@ -35,6 +35,9 @@ function createWindow() {
         mainWindow?.webContents.send('getAzanZohr', '');
         mainWindow?.webContents.send('getAzanMaghreb', '');
     });
+    electron_1.ipcMain.on('playAzan', () => {
+        mainWindow?.webContents.send('playAzan', '');
+    });
     mainWindow.on('ready-to-show', mainWindow.show);
     mainWindow.loadURL('http://localhost:5000');
 }

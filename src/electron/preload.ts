@@ -1,7 +1,7 @@
 import os from 'os'
 import { ipcRenderer, contextBridge } from 'electron'
 import { getDay, getAzanSobh, getAzanZohr, getAzanMaghreb } from './jalaliDays'
-
+import { Notification } from 'node-notifier'
 declare global {
   interface Window {
     dayApi: any

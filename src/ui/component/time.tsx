@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { motion } from 'framer-motion'
+import soundazan from '../assets/bell.mp3'
+import soundhour from '../assets/hour.wav'
 type ClockProps = {
   sHour: string
   sMinute: string
@@ -11,14 +13,9 @@ type ClockProps = {
 }
 function Clock({ sHour, sMinute, zHour, zMinute, mHour, mMinute }: ClockProps) {
   const [time, setTime] = useState(new Date())
-  const [audio] = useState(new Audio('../../../dist-react/assets/hour.wav'))
-  const [azan] = useState(new Audio('../../../dist-react/assets/azan.mp3'))
-  const playSound = () => {
-    audio.play()
-  }
-  const playAzan = () => {
-    azan.play()
-  }
+  const [isPlaying, setIsPlaying] = useState<boolean>(false)
+  const soundAzan = new Audio(soundhour)
+  const soundHour = new Audio(soundazan)
   useEffect(() => {
     const timerID = setInterval(() => {
       setTime(new Date())
@@ -27,9 +24,7 @@ function Clock({ sHour, sMinute, zHour, zMinute, mHour, mMinute }: ClockProps) {
     // Cleanup function to clear interval when component unmounts
     return () => clearInterval(timerID)
   }, [])
-  useEffect(() => {
-    audio.pause()
-  }, [])
+
   const locatetime = time
     .toLocaleTimeString('en-US', {
       hour: 'numeric',
@@ -45,28 +40,34 @@ function Clock({ sHour, sMinute, zHour, zMinute, mHour, mMinute }: ClockProps) {
   const second = splitTime[2].split(' ')[0]
   const timeOfDay = locatetime.split(' ')[1]
   //play sound on the hour
-  if (second === '00' && minute === '00') {
-    playSound()
-  }
-  if (
-    parseInt(hour) === parseInt(sHour) &&
-    parseInt(minute) === parseInt(sMinute)
-  ) {
-    playAzan()
-  }
-  if (
-    parseInt(hour) === parseInt(zHour) &&
-    parseInt(minute) === parseInt(zMinute)
-  ) {
-    playAzan()
-  }
+  useEffect(() => {
+    if (second === '00' && minute === '00') {
+      soundHour.play()
+    }
+    if (
+      parseInt(hour) === parseInt(sHour) &&
+      parseInt(minute) === parseInt(sMinute) &&
+      second === '00'
+    ) {
+      soundAzan.play()
+    }
+    if (
+      parseInt(hour) === parseInt(zHour) &&
+      parseInt(minute) === parseInt(zMinute) &&
+      second === '00'
+    ) {
+      soundAzan.play()
+    }
 
-  if (
-    parseInt(hour) === parseInt(mHour) &&
-    parseInt(minute) === parseInt(mMinute)
-  ) {
-    playAzan()
-  }
+    if (
+      parseInt(hour) < parseInt(mHour) &&
+      parseInt(minute) < parseInt(mMinute) &&
+      second === '00'
+    ) {
+      console.log('play maghreb')
+      soundAzan.play()
+    }
+  }, [hour, minute, second])
 
   return (
     <div className="flex flex-col items-center justify-center">
