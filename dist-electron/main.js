@@ -27,7 +27,7 @@ function createWindow() {
         mainWindow?.webContents.send('getAzanSobh', '');
         mainWindow?.webContents.send('getAzanZohr', '');
         mainWindow?.webContents.send('getAzanMaghreb', '');
-    }, 1800000);
+    }, 18000000);
     //ipcMain: Listens for events in themain process.
     mainWindow.webContents.on('did-frame-finish-load', () => {
         mainWindow?.webContents.send('getDay', '');
@@ -48,6 +48,5 @@ electron_1.app
 })
     .catch(error => {
     console.error('Failed to create window:', error);
-    electron_1.dialog.showErrorBox('Error', `Failed to create window: ${error.message}`);
 });
 //set interval to update webcontents every 30 minutes

@@ -1,7 +1,7 @@
 //check if the string includes the day of the persian  week
 export const checkDayOfWeek = (day: string) => {
-  if (day.includes('شنبه')) {
-    return 'شنبه'
+  if (day.includes('جمعه')) {
+    return 'جمعه'
   } else if (day.includes('یکشنبه')) {
     return 'یکشنبه'
   } else if (day.includes('دوشنبه')) {
@@ -12,8 +12,8 @@ export const checkDayOfWeek = (day: string) => {
     return 'چهارشنبه'
   } else if (day.includes('پنجشنبه')) {
     return 'پنجشنبه'
-  } else if (day.includes('جمعه')) {
-    return 'جمعه'
+  } else if (day.includes('شنبه')) {
+    return 'شنبه'
   }
 }
 //check if the string includes the month of the persian

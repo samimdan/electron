@@ -12,6 +12,7 @@ import './font/iranSans.css'
 import './font/clock.css'
 import './index.css'
 import './App.css'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMountainSun, faSun } from '@fortawesome/free-solid-svg-icons'
 

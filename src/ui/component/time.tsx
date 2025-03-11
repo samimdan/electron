@@ -60,11 +60,10 @@ function Clock({ sHour, sMinute, zHour, zMinute, mHour, mMinute }: ClockProps) {
     }
 
     if (
-      parseInt(hour) < parseInt(mHour) &&
-      parseInt(minute) < parseInt(mMinute) &&
+      parseInt(hour) === parseInt(mHour) &&
+      parseInt(minute) === parseInt(mMinute) &&
       second === '00'
     ) {
-      console.log('play maghreb')
       soundAzan.play()
     }
   }, [hour, minute, second])

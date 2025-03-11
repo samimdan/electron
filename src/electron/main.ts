@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, dialog } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
 import path from 'path'
 
 function createWindow() {
@@ -24,7 +24,7 @@ function createWindow() {
     mainWindow?.webContents.send('getAzanSobh', '')
     mainWindow?.webContents.send('getAzanZohr', '')
     mainWindow?.webContents.send('getAzanMaghreb', '')
-  }, 1800000)
+  }, 18000000)
   //ipcMain: Listens for events in themain process.
   mainWindow.webContents.on('did-frame-finish-load', () => {
     mainWindow?.webContents.send('getDay', '')
@@ -46,6 +46,5 @@ app
   })
   .catch(error => {
     console.error('Failed to create window:', error)
-    dialog.showErrorBox('Error', `Failed to create window: ${error.message}`)
   })
 //set interval to update webcontents every 30 minutes

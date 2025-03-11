@@ -1,32 +1,19 @@
-// import axios from 'axios'
-// import * as cheerio from 'cheerio'
+const si = require('systeminformation')
 
-// const url = 'https://www.bahesab.ir/time/hamedan/'
+async function getSystemInfo() {
+  const cpu = await si.cpu()
+  const memory = await si.mem()
+  const osInfo = await si.osInfo()
+  const battery = await si.battery()
+  const graphics = await si.graphics()
 
-// axios
-//   .get(url)
-//   .then(response => {
-//     const html = response.data
-//     const $ = cheerio.load(html)
-//     const day = $('#timer').text()
-//     return day
-//   })
-//   .catch(error => {
-//     console.log(error)
-//   })
-console.log('Hello World')
-const axios = require('axios')
-const cheerio = require('cheerio')
-const url = 'https://www.bahesab.ir/time/hamedan/'
-axios
-  .get(url)
-  .then(response => {
-    const html = response.data
-    const $ = cheerio.load(html)
-    const day = $('#azan-time5').text()
-
-    console.log(day)
+  console.log({
+    cpu,
+    memory,
+    osInfo,
+    battery,
+    graphics,
   })
-  .catch(error => {
-    console.log(error)
-  })
+}
+
+getSystemInfo()
